@@ -1,0 +1,15 @@
+function output = myCLAHE(input, window, thresh, nbins)
+
+[row, col] = size(input);
+half_window = ceil((window - 1)/2); %Odd window length preferred
+
+for r=1:row
+    for c=1:col
+        %% Finding window bounds
+        x_limit = [max(1, r - half_window) min(row, r + half_window)];
+        y_limit = [max(1, c - half_window) min(col, c + half_window)];
+        
+        sub_image = input(x_limit(1):x_limit(2), y_limit(1):y_limit(2));
+        output(r, c) = myCLAHEonWindow(sub_image, 
+
+end
