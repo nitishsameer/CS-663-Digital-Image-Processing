@@ -17,4 +17,6 @@ for r=1:row
         end
     end
 end
+figure
+imshow(output);
 end

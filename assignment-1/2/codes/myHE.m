@@ -23,7 +23,7 @@ cdf = cumsum(pdf);
 for d = 1:channel
     for i=1:row
         for j=1:col
-            output(i, j, d) = double(255* cdf(floor(input(i, j, d)) + 1));
+            output(i, j, d) = double(255* cdf(ceil(input(i, j, d)+1)));
         end
     end
 end

@@ -15,7 +15,7 @@ end
 pdf = pdf/(row*col);
 
 %% Modifying PDF
-extra_mass = sum(pdf((pdf - thresh) > 0) - thresh);
+extra_mass = sum((pdf((pdf - thresh) > 0)) - thresh);
 pdf(pdf>thresh) = thresh;
 pdf = pdf + (extra_mass/nbins)*ones(size(pdf));
 
@@ -23,8 +23,7 @@ pdf = pdf + (extra_mass/nbins)*ones(size(pdf));
 cdf = cumsum(pdf);
 
 %% New Intensities
-hist_corrected = cdf*(nbins-1); % nbins ya intensity_levels
-hist_corrected = uint8(round(hist_corrected));
+hist_corrected = round(cdf*(nbins-1)); % nbins / intensity_levels
 
 %% Find desired intensity of the pixel
 pixel_bin = ceil(pixel_intensity+1)/bin_size;
