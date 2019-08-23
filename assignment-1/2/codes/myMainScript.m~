@@ -1,7 +1,7 @@
 %% MyMainScript
 
-%% Your code here
 tic;
+%% Your code here
 barbara = imread('../data/barbara.png');
 TEM = imread('../data/TEM.png');
 canyon = imread('../data/canyon.png');
@@ -141,66 +141,10 @@ figure
 imshow(barbara);
 figure
 imshow(output);
-output = myCLAHE(barbara, window, thresh, 256);  % large window size 
+output = myCLAHE(barbara, window, thresh, 256);  %half window size 
 figure
-imshow(output);
-output = myCLAHE(barbara, window, thresh, 256);  % small window size 
-figure
-imshow(output);
-output = myCLAHE(barbara, window, thresh, 256);  % half threshold
-figure
-imshow(output);
-toc;
+imshow(barbara);
 
-tic;
-output = myCLAHE(TEM, window, thresh, 256);
-figure
-imshow(TEM);
-figure
-imshow(output);
-output = myCLAHE(TEM, window, thresh, 256);  % large window size 
-figure
-imshow(output);
-output = myCLAHE(TEM, window, thresh, 256);  % small window size 
-figure
-imshow(output);
-output = myCLAHE(TEM, window, thresh, 256);  % half threshold
-figure
-imshow(output);
-toc;
-
-tic;
-output = myCLAHE(canyon, window, thresh, 256);
-figure
-imshow(canyon);
-figure
-imshow(output);
-output = myCLAHE(canyon, window, thresh, 256);  % large window size 
-figure
-imshow(output);
-output = myCLAHE(canyon, window, thresh, 256);  % small window size 
-figure
-imshow(output);
-output = myCLAHE(canyon, window, thresh, 256);  % half threshold
-figure
-imshow(output);
-toc;
-
-tic;
-output = myCLAHE(chestXray, window, thresh, 256);
-figure
-imshow(chestXray);
-figure
-imshow(output);
-output = myCLAHE(chestXray, window, thresh, 256);  % large window size 
-figure
-imshow(output);
-output = myCLAHE(chestXray, window, thresh, 256);  % small window size 
-figure
-imshow(output);
-output = myCLAHE(chestXray, window, thresh, 256);  % half threshold
-figure
-imshow(output);
 toc;
 
 %% end
