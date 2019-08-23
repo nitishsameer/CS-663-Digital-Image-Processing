@@ -5,7 +5,6 @@ output = input; %To maintain the datatype
 half_window = ceil((window - 1)/2); %Odd window length preferred
 
 for r=1:row
-    disp(r)
     for c=1:col
         for d=1:depth
             %% Finding window bounds and calling myCLAHEonWindow

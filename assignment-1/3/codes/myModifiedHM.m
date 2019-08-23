@@ -35,7 +35,6 @@ for d = 1:channel_in
 end
 %% Output image
 for r = 1: row_in
-    disp(r)
     for c = 1:col_in
         for d = 1: channel_in
             output(r, c, d) = new_intensity(ceil(input(r, c, d)+1), d);

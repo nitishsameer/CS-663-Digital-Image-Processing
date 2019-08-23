@@ -1,0 +1,34 @@
+%% MyMainScript
+
+
+%% Your code here
+% Part a - Shrink
+tic;
+circles = imread('../data/circles_concentric.png');
+output1 = myShrinkImageByFactorD(circles, 2);
+output2 = myShrinkImageByFactorD(circles, 3);
+figure
+imshow(circles);
+title("Original Image");
+figure
+imshow(output1);
+title("Shrinked Image by factor of 2");
+figure
+imshow(output2);
+title("Shrinked Image by factor of 3");
+toc;
+
+%% Part 2 - Bilinear Interpolation
+tic;
+input = imread('../data/barbaraSmall.png');
+output1 = myShrinkImageByFactorD(circles, 2);
+output2 = myShrinkImageByFactorD(circles, 3);
+figure
+imshow(circles);
+title("Original Image");
+figure
+imshow(output1);
+title("Shrinked Image by factor of 2");
+%% Part 3 - Nearest Neighbor Interpolation
+
+%% end
