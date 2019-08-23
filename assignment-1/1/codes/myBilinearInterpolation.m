@@ -1,4 +1,7 @@
 function [A] = myBilinearInterpolation(inputImage)
+    [row, col] = size(inputImage);
+    A = zeros(3*row-2, 2*col-1);
+    
     A = kron(inputImage,[1,0;0,0;0,0]);  % padding matrix with 0s in between elements to be interpolated
     A(end,:)= [];A(end,:)= [];A(:,end)= [];  % removing excess rows and columns at the end
     A(1:3:end,2:2:end) = (A(1:3:end,1:2:end-1) + A(1:3:end,3:2:end))/2;
