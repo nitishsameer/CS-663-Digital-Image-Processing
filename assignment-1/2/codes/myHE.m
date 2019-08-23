@@ -5,16 +5,16 @@ output = input;
 
 %% Calculating the pdf of the image
 intensity_levels = 256; %Assumed 8-bit image
-pdf = zeros(1, intensity_levels);
+pdf = zeros(intensity_levels, channel);
 for d = 1:channel
     for i=1:row
         for j=1:col
             ind = ceil(input(i, j, d)+1); 
-            pdf(ind) = pdf(ind) + 1;
+            pdf(ind, d) = pdf(ind, d) + 1;
         end
     end
-pdf = pdf/(row*col);
 end
+pdf = pdf/(row*col);
 
 %% Calculating cdf
 cdf = cumsum(pdf);
@@ -23,7 +23,7 @@ cdf = cumsum(pdf);
 for d = 1:channel
     for i=1:row
         for j=1:col
-            output(i, j, d) = double(255* cdf(ceil(input(i, j, d)+1)));
+            output(i, j, d) = double(255* cdf(ceil(input(i, j, d)+1)), d);
         end
     end
 end

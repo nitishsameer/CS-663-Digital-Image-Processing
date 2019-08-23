@@ -1,0 +1,62 @@
+function output = myHM(input, mask, ref, refmask)
+output = input; %To maintain the datatyp
+
+[row_in, col_in, channel_in] = size(input);
+[row_ref, col_ref, channel_ref] = size(ref);
+
+%% Calculating PDF of input image
+intensity_levels = 256; %Assumed 8-bit image
+pdf_in = zeros(1, intensity_levels);  %input image
+for d = 1:channel_in
+    for i=1:row_in
+        for j=1:col_in
+            ind = ceil(input(i, j, d)+1); 
+            if (mask(i,j))
+            pdf_in(ind) = pdf_in(ind) + 1;
+            end
+        end
+    end
+pdf_in = pdf_in/(row_in*col_in);
+end
+%% Calculating PDF of reference image
+pdf_ref = zeros(1, intensity_levels);
+for d = 1:channel_ref
+    for i=1:row_ref
+        for j=1:col_ref
+            index = ceil(input(i, j, d)+1); 
+            if (refmask(i,j))
+            pdf_ref(index) = pdf_ref(index) + 1;
+            else
+            end
+        end
+    end
+pdf_ref = pdf_ref/(row_ref*col_ref);
+end
+
+%% Calculating cdf
+cdf_in = cumsum(pdf_in);
+cdf_ref = cumsum(pdf_ref);
+
+%% Mapping of Histogram
+cdf_in_corrected = cdf_in; %To match the dimension
+new_intensity = zeros(1, intensity_levels);
+for iter = 1:intensity_levels
+    [~, argmin] = min(abs(cdf_ref - cdf_in(iter)));
+    cdf_in_corrected(iter) = cdf_in(argmin); %Argmin is bin number. argmin - 1 is the intensity level
+    
+end
+%% Output image
+for r = 1: row_in
+    disp(r)
+    for c = 1:col_in
+        for d = 1: channel_in
+            if mask(r, c)
+            output(r, c, d) = cdf_in_corrected(ceil(input(r, c, d)+1));
+            else
+            output(r ,c, d) = input (r, c, d);
+            end
+        end
+    end
+end
+end
+
